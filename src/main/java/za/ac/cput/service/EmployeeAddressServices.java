@@ -3,7 +3,8 @@ package za.ac.cput.service;
 import za.ac.cput.domain.EmployeeAddress;
 import za.ac.cput.repository.EmployeeAddressRepository;
 
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 public class EmployeeAddressServices implements IEmployeeAddressServices{
      private final EmployeeAddressRepository repository;
@@ -21,7 +22,7 @@ public class EmployeeAddressServices implements IEmployeeAddressServices{
      }
 
     @Override
-    public Set<EmployeeAddress> getAll() {
+    public ArrayList<EmployeeAddress> getAll() {
         return this.repository.getAll();
     }
 

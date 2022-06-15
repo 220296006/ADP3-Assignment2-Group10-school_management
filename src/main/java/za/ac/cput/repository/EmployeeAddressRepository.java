@@ -2,16 +2,20 @@ package za.ac.cput.repository;
 
 import za.ac.cput.domain.EmployeeAddress;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class EmployeeAddressRepository implements IEmployeeAddressRepository {
 
     private static EmployeeAddressRepository repository = null;
-    private Set<EmployeeAddress> EmployeeAddressDB = null;
+//    private Set<EmployeeAddress> EmployeeAddressDB = null;
+    private ArrayList<EmployeeAddress> EmployeeAddressDB = null;
 
     private EmployeeAddressRepository() {
-        EmployeeAddressDB = new HashSet<EmployeeAddress>();
+//        EmployeeAddressDB = new HashSet<EmployeeAddress>();
+        EmployeeAddressDB = new ArrayList<>();
     }
 
     public static EmployeeAddressRepository getRepository() {
@@ -59,7 +63,7 @@ public class EmployeeAddressRepository implements IEmployeeAddressRepository {
     }
 
     @Override
-    public Set<EmployeeAddress> getAll() {
+    public ArrayList<EmployeeAddress> getAll() {
         return EmployeeAddressDB;
     }
 }

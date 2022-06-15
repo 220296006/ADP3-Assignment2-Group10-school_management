@@ -1,7 +1,8 @@
 package za.ac.cput.repository;
 import za.ac.cput.domain.EmployeeAddress;
 
-import java.util.Set;
+import java.util.List;
+
 public interface IEmployeeAddressRepository extends IRepository<EmployeeAddress,String> {
-    public Set<EmployeeAddress> getAll();
+    public List<EmployeeAddress> getAll();
 }
