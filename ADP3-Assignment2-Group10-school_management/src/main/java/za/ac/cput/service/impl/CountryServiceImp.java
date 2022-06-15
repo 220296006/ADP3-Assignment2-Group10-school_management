@@ -1,16 +1,23 @@
 package za.ac.cput.service.impl;
 import org.springframework.stereotype.Service;
 import za.ac.cput.domain.Country;
-import za.ac.cput.repository.CountryRepository;
+import za.ac.cput.repository.ICountryRepository;
 import za.ac.cput.service.CountryService;
-import java.util.Set;
 
+import java.util.Collections;
+import java.util.List;
+import java.util.Optional;
+/* CountryServiceImp.java
+ * CountryService Implementation class for the Country Entity
+ * @Author: Thabiso Matsaba (220296006)
+ * Date: 14 June 2022
+ */
 @Service
 public class CountryServiceImp implements CountryService {
 
-    private final CountryRepository repository;
+    private final ICountryRepository repository;
 
-    public CountryServiceImp(CountryRepository repository){
+    public CountryServiceImp(ICountryRepository repository){
 
         this.repository = repository;
     }
@@ -22,20 +29,24 @@ public class CountryServiceImp implements CountryService {
     }
 
     @Override
-    public Country read(String s) {
-
-        return this.repository.read(s);
+    public Optional<Country> read(String id){
+        return this.repository.findById(id);
     }
 
     @Override
-    public void delete(String s){
+    public void delete(Country country){
 
-        this.repository.delete(s);
+        this.repository.delete(country);
     }
 
     @Override
-    public Set<Country> readAll() {
+    public List<Country> findAll() {
 
-        return this.repository.readAll();
+        return this.repository.findAll();
+    }
+
+    @Override
+    public List findById(String id) {
+        return Collections.singletonList(this.repository.findById(id));
     }
 }

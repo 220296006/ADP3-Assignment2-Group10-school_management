@@ -1,14 +1,26 @@
 package za.ac.cput.domain;
+import javax.persistence.Entity;
+import javax.validation.constraints.NotNull;
+import java.io.Serializable;
+import java.util.Objects;
+import javax.persistence.Id;
 /* Country.java
  * Entity for the Country Domain
  * @Author: Thabiso Matsaba (220296006)
  * Date: 10 June 2022
  */
+@Entity
+public class Country  {
 
-public class Country{
-
+    @NotNull
+    @javax.persistence.Id
     private String id;
+
+    @NotNull
     private String name;
+
+    protected Country(){
+    }
 
     private Country(Builder builder){
         this.id = builder.id;
@@ -57,4 +69,40 @@ public class Country{
             return new Country(this);
         }
     }
-}
+
+    public static class Id {
+        private String id;
+
+        public Id(String id) {
+            this.id = id;
+        }
+
+        protected Id(){
+        }
+
+        public String getId() {
+            return id;
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() !=o.getClass()) return false;
+            Id id = (Id) o;
+            return id.equals(id.id);
+        }
+
+        @Override
+        public int hashCode() {
+            return Objects.hash(id);
+        }
+
+        @Override
+        public String toString() {
+            return "Id{" +
+                    "id='" + id + '\'' +
+                    '}';
+        }
+    }
+    }
+

@@ -13,4 +13,9 @@ public class CountryFactory {
                                     .setName(name)
                                     .build();
     }
+
+    public static Country.Id createId(Country country){
+
+        return new Country.Id(country.getId());
+    }
 }

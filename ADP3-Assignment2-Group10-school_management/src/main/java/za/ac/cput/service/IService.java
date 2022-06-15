@@ -1,4 +1,6 @@
 package za.ac.cput.service;
+import java.util.Optional;
+
 /* IService.java
  * Service Interface for the Country Entity
  * @Author: Thabiso Matsaba (220296006)
@@ -7,6 +9,6 @@ package za.ac.cput.service;
 public interface IService<T, ID> {
 
     T save(T t);
-    T read(ID id);
-   void delete(ID id);
+    Optional<T> read(String id);
+   void delete(T t);
 }
