@@ -1,6 +1,5 @@
 package za.ac.cput.repository;
 
-/*Waseem Dollie - 216040566*/
 
 import java.util.Optional;
 
