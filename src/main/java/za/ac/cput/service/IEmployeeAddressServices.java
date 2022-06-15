@@ -2,9 +2,10 @@ package za.ac.cput.service;
 
 import za.ac.cput.domain.EmployeeAddress;
 
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 public interface IEmployeeAddressServices extends IServices<EmployeeAddress,String>{
-    public Set<EmployeeAddress> getAll();
+    public List<EmployeeAddress> getAll();
 
 }
