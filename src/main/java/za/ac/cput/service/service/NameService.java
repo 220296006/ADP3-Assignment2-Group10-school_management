@@ -5,13 +5,8 @@ import za.ac.cput.service.IService;
 
 import java.util.List;
 
-public interface NameService extends IService<Name, String> {
-    //fix add name
-    //
-    //
-    //
-    //
-    List<Name>findAll();
-
-    List<Name>findByfirstName(String firstName);
+public interface NameService extends IService<Name,Name.NameId> {
+    List<Name> findAll();
+    //void deleteById(String id);
+    List<Name> findByFirstName(String firstName);
 }

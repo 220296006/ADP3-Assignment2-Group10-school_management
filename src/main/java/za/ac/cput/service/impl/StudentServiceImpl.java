@@ -3,16 +3,16 @@ package za.ac.cput.service.impl;
 /*Waseem Dollie - 216040566*/
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import za.ac.cput.domain.Student;
 import za.ac.cput.repository.StudentRepository;
 import za.ac.cput.service.service.StudentService;
 
-
 import java.util.List;
 import java.util.Optional;
-
+@Service
 public class StudentServiceImpl implements StudentService {
-    public final StudentRepository repository;
+    private final StudentRepository repository;
 
     @Autowired
     public StudentServiceImpl(StudentRepository repository)
