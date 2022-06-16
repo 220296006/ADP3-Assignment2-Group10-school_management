@@ -5,11 +5,22 @@
 */
 package za.ac.cput.domain;
 
+import com.sun.istack.NotNull;
+
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.IdClass;
+import java.io.Serializable;
 import java.util.Objects;
 
+@Entity
+@IdClass(Employee.EmployeeId.class)
 public class Employee {
 
+    @Id
+    @NotNull
     public String staffId;
+    @NotNull
     public String email;
     public Name name;
 
@@ -51,6 +62,21 @@ public class Employee {
                 "Name :" + name +
                 "}";
     }
+
+    public static class EmployeeId implements Serializable
+    {
+        public String staffId;
+        public EmployeeId(String staffId){
+            this.staffId=staffId;
+        }
+        protected EmployeeId(){
+
+        }
+        public String getStaffId(){
+            return staffId;
+        }
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o)

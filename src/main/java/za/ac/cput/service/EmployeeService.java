@@ -5,7 +5,7 @@ import za.ac.cput.service.IService;
 
 import java.util.List;
 
-public interface EmployeeService extends IService<Employee,String>{
+public interface EmployeeService extends IService<Employee, Employee.EmployeeId>{
 
-    List<Employee> findAll();
+    List<Employee> readAll();
 }

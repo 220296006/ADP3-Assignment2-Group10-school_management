@@ -5,13 +5,30 @@
 */
 package za.ac.cput.domain;
 
+import com.sun.istack.NotNull;
+
+import javax.persistence.Embeddable;
+import javax.persistence.Id;
+import javax.persistence.IdClass;
+import javax.persistence.Entity;
+import java.io.Serializable;
 import java.util.Objects;
 
-public class Name {
-
+@Embeddable
+@Entity
+@IdClass(Name.NameId.class)
+public class Name implements Serializable {
+    @NotNull
+    @Id
     public String firstName;
+    @NotNull
     public String middleName;
+    @NotNull
     public String lastName;
+
+    protected Name(){
+
+    }
 
     //builder constructor
     public Name (Builder builder){
@@ -42,6 +59,21 @@ public class Name {
 
     public void setLastName(){
         this.lastName = lastName;
+    }
+
+    //NameId class
+    public static class NameId implements  Serializable
+    {
+        public String firstName;
+        public NameId(String firstName){
+            this.firstName=firstName;
+        }
+        protected NameId(){
+
+        }
+        public String getFirstName(){
+            return firstName;
+        }
     }
 
     @Override
@@ -103,4 +135,6 @@ public class Name {
             return new Name(this);
         }
     }
+
+
 }
