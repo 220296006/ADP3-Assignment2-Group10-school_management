@@ -3,7 +3,7 @@ package za.ac.cput.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import za.ac.cput.domain.Country;
-import za.ac.cput.repository.CountryRepository;
+import za.ac.cput.repository.ICountryRepository;
 import za.ac.cput.service.service.CountryService;
 
 import java.util.List;
@@ -11,10 +11,10 @@ import java.util.Optional;
 
 @Service
 public class CountryServiceImpl implements CountryService {
-    private final CountryRepository repository;
+    private final ICountryRepository repository;
 
     @Autowired
-    public CountryServiceImpl(CountryRepository repository)
+    public CountryServiceImpl(ICountryRepository repository)
     {
         this.repository=repository;
     }

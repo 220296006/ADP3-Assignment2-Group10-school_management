@@ -3,7 +3,7 @@ package za.ac.cput.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import za.ac.cput.domain.Name;
-import za.ac.cput.repository.NameRepository;
+import za.ac.cput.repository.INameRepository;
 import za.ac.cput.service.service.NameService;
 
 import java.util.List;
@@ -11,9 +11,9 @@ import java.util.Optional;
 
 @Service
 public class NameServiceImpl implements NameService {
-    private final NameRepository repository;
+    private final INameRepository repository;
     @Autowired
-    public NameServiceImpl(NameRepository repository){this.repository=repository;}
+    public NameServiceImpl(INameRepository repository){this.repository=repository;}
     @Override
     public Name save(Name name){return this.repository.save(name);}
 
@@ -33,3 +33,4 @@ public class NameServiceImpl implements NameService {
     @Override
     public List findByFirstName(String firstName){return this.repository.findByFirstName(firstName);}
 }
+

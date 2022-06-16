@@ -30,4 +30,11 @@ public class StringHelper {
         EmailValidator ev=EmailValidator.getInstance();
         return ev.isValid(email);
     }
+
+
+    //for postal code. implement it
+    public static boolean isValidPostalCode(int code){
+        return code > 1000 && code < 9999;
+    }
+
 }

@@ -3,7 +3,7 @@ package za.ac.cput.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import za.ac.cput.domain.Address;
-import za.ac.cput.repository.AddressRepository;
+import za.ac.cput.repository.IAddressRepository;
 import za.ac.cput.service.service.AddressService;
 
 import java.util.List;
@@ -11,9 +11,9 @@ import java.util.Optional;
 
 @Service
 public class AddressServiceImpl implements AddressService {
-    private final AddressRepository repository;
+    private final IAddressRepository repository;
     @Autowired
-    public AddressServiceImpl(AddressRepository repository)
+    public AddressServiceImpl(IAddressRepository repository)
     {
         this.repository=repository;
     }

@@ -9,7 +9,7 @@ import za.ac.cput.domain.StudentAddress;
 import java.util.List;
 
 @Repository
-public interface StudentAddressRepository extends JpaRepository<StudentAddress,StudentAddress.StudentAddressId> {
+public interface IStudentAddressRepository extends JpaRepository<StudentAddress,StudentAddress.StudentAddressId> {
     List<StudentAddress> findAll();
     List<StudentAddress>findByStudentId(String studentId);
 

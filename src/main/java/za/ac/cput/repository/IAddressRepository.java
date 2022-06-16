@@ -7,7 +7,7 @@ import za.ac.cput.domain.Address;
 import java.util.List;
 
 @Repository
-public interface AddressRepository extends JpaRepository<Address,Address.AddressId> {
+public interface IAddressRepository extends JpaRepository<Address,Address.AddressId> {
     List<Address> findAll();
     List<Address>findByUnitNumber(String unitNumber);
 }

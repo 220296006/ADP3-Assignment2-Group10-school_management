@@ -14,127 +14,82 @@ import javax.persistence.Entity;
 import java.io.Serializable;
 import java.util.Objects;
 
-@Embeddable
+
 @Entity
+@Embeddable
 @IdClass(Name.NameId.class)
 public class Name implements Serializable {
     @NotNull
     @Id
     public String firstName;
-    @NotNull
-    public String middleName;
-    @NotNull
-    public String lastName;
+    @NotNull public String lastName,middleName;
 
-    protected Name(){
-
-    }
-
-    //builder constructor
-    public Name (Builder builder){
-        this.firstName = builder.firstName;
-        this.middleName = builder.middleName;
-        this.lastName = builder.lastName;
-    }
-
-    public String getFirstName(){
-        return firstName;
-    }
-
-    public void setFirstName(){
-        this.firstName = firstName;
-    }
-
-    public String middleName(){
-        return middleName;
-    }
-
-    public void setMiddleName(){
-        this.middleName = middleName;
-    }
-
-    public String getLastName(){
-        return lastName;
-    }
-
-    public void setLastName(){
-        this.lastName = lastName;
-    }
-
-    //NameId class
-    public static class NameId implements  Serializable
+    protected Name(){}
+    private Name(Builder builder)
     {
-        public String firstName;
-        public NameId(String firstName){
-            this.firstName=firstName;
-        }
-        protected NameId(){
-
-        }
-        public String getFirstName(){
-            return firstName;
-        }
+        this.firstName=builder.firstName;
+        this.lastName=builder.lastName;
+        this.middleName=builder.middleName;
     }
+    public String getFirstName(){return firstName;}
+    public String getMiddleName(){return middleName;}
+    public String getLastName(){return lastName;}
 
-    @Override
-    public String toString(){
-        return "Name{" +
-                "First Name :" + firstName +
-                "Middle Name:" + middleName +
-                "Last Name: " + lastName;
-    }
-
-    @Override
-    public boolean equals(Object o)
+    public static class Builder
     {
-        if(this==o)
-            return true;
-        if(o==null || getClass()!=o.getClass())
-            return false;
-        Name name=(Name) o;
-        return firstName.equals(name.firstName);
-    }
-
-    @Override
-    public int hashCode(){
-        return Objects.hash(firstName);
-    }
-
-
-    //builder setters
-    public static class Builder{
         public String firstName;
         public String middleName;
         public String lastName;
 
-        public Builder setFirstName(String firstName){
-            this.firstName = firstName;
+        public Builder firstName(String firstName)
+        {
+            this.firstName=firstName;
+            return this;
+        }
+        public Builder middleName(String middleName)
+        {
+            this.middleName=middleName;
+            return this;
+        }
+        public Builder lastName(String lastName)
+        {
+            this.lastName=lastName;
             return this;
         }
 
-        public Builder setMiddleName(String middleName){
-            this.middleName = middleName;
+        public Builder copy(Name name)
+        {
+            this.firstName=name.firstName;
+            this.middleName=name.middleName;
+            this.lastName=name.lastName;
             return this;
         }
-
-        public Builder setLastName(String lastName){
-            this.lastName = lastName;
-            return this;
-        }
-
-        //builder copy
-        public Builder copy(Name name){
-            this.firstName = name.firstName;
-            this.middleName = name.middleName;
-            this.lastName = name.lastName;
-
-            return this;
-        }
-
-        public Name build(){
-            return new Name(this);
-        }
+        public Name build(){return new Name(this);}
     }
+    public static class NameId implements  Serializable
+    {
+        public String firstName;
+        public NameId(String firstName){this.firstName=firstName;}
+        protected NameId(){}
+        public String getFirstName(){return firstName;}
+    }
+    @Override
+    public boolean equals(Object o)
+    {
+        if(this==o) return true;
+        if(o==null || getClass()!=o.getClass()) return false;
+        Name name=(Name) o;
+        return firstName.equals(name.firstName);
+    }
+    @Override
+    public int hashCode(){return Objects.hash(firstName);}
 
-
+    @Override
+    public String toString() {
+        return "Name{" +
+                "firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", middleName='" + middleName + '\'' +
+                '}';
+    }
 }
