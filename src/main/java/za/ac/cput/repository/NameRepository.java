@@ -8,6 +8,7 @@ package za.ac.cput.repository;
 import za.ac.cput.domain.Name;
 
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 public class NameRepository implements INameRepository{
@@ -27,8 +28,9 @@ public class NameRepository implements INameRepository{
         return repository;
     }
 
+
     @Override
-    public Name create(Name name) {
+    public Name save(Name name) {
         boolean success = NameDB.add(name);
 
         if(!success){
@@ -39,35 +41,14 @@ public class NameRepository implements INameRepository{
     }
 
     @Override
-    public Name read(String firstName) {
-        for(Name e : NameDB){
-            if (e.getFirstName() == firstName)
-                return e;
-        }
-        return null;
+    public Optional<Name> read(Name.NameId nameId) {
+        return this.repository.read(nameId);
     }
 
-    @Override
-    public Name update(Name name) {
-        Name oldName = read(name.getFirstName());
-        if(oldName != null){
-            NameDB.remove(oldName);
-            NameDB.add(oldName);
-            return name;
-        }
-        else
-        return null;
-    }
 
     @Override
-    public boolean delete(String firstName) {
-        Name nameDelete = read(firstName);
-        if (nameDelete == null){
-            return false;
-        }
-        else
-            NameDB.remove(nameDelete);
-            return true;
+    public void delete(Name name) {
+    this.NameDB.remove(name);
     }
 
     @Override
