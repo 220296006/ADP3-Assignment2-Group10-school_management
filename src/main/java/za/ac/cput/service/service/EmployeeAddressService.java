@@ -6,9 +6,9 @@ import za.ac.cput.service.IService;
 
 import java.util.List;
 
-public interface EmployeeService extends IService<Employee,Employee.EmployeeId> {
-    List<Employee>findAll();
+public interface EmployeeAddressService extends IService<EmployeeAddress,EmployeeAddress.EmployeeAddressId> {
+    List<EmployeeAddress>findAll();
     //void deleteById(String id);
-    List<Employee>findByStaffId(String staffId);
 
+    List<EmployeeAddress>findByStaffId(String staffId);
 }
