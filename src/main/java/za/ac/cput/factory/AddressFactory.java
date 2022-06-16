@@ -6,45 +6,27 @@
 
 package za.ac.cput.factory;
 
-import org.apache.commons.lang3.StringUtils;
 import za.ac.cput.domain.Address;
 
 public class AddressFactory {
-    public static Address build(String unitNumber, String complexNumber, String streetNumber,
-                                String streetName, int postalCode, Object city) {
-        if (streetNumber == null || streetNumber.isEmpty())
-            throw new IllegalArgumentException("Street number is required!");
-        if (streetName == null || streetName.isEmpty())
-            throw new IllegalArgumentException("Street name is required");
-        if (postalCode <1000  || postalCode >9999)
-            throw new IllegalArgumentException("Postal code invalid!");
-
-        unitNumber = HelperClass.setEmptyIfNull(unitNumber);
-        complexNumber = HelperClass.setEmptyIfNull(complexNumber);
-
-        return new Address.Builder().unitNumber(unitNumber).complexNumber(complexNumber)
-                .streetNumber(streetNumber).streetName(streetName).postalCode(postalCode).city(city)
-                .build();
+    public static Address build(String unitNumber, String complexName, String streetNumber, String streetName, String postalCode)
+    {
+        if(unitNumber==null || unitNumber.isEmpty())
+            throw new IllegalArgumentException("unitNumber is required");
+        if(complexName==null||complexName.isEmpty())
+            throw new IllegalArgumentException("complexName is required");
+        if(streetNumber==null||streetNumber.isEmpty())
+            throw new IllegalArgumentException("streetNumber is required");
+        if(streetName==null|| streetName.isEmpty())
+            throw new IllegalArgumentException("streetName is required");
+        if(postalCode==null||postalCode.isEmpty())
+            throw new IllegalArgumentException("postal code is required");
+        return new Address.Builder().unitNumber(unitNumber).complexName(complexName).streetNumber(streetNumber).streetName(streetName).postalCode(postalCode).build();
     }
-
-    public static Address.AddressIdentity buildIdentity(Address address) {
-        return new Address.AddressIdentity(address.getStreetNumber(),
-                address.getStreetName());
+    public static Address.AddressId buildId(Address address)
+    {
+        return new Address.AddressId(address.getUnitNumber());
     }
 }
-class HelperClass {
-    private static boolean isEmptyOrNull(String str) {
-        return StringUtils.isEmpty(str);
-    }
 
-    //unitNumber and complexNumber
-    public static String setEmptyIfNull(String str) {
-        if (isEmptyOrNull(str))
-            return StringUtils.EMPTY;
-        return str;
-    }
-
-
-
-}
 

@@ -15,7 +15,7 @@ class CityFactoryTest {
         City city = CityFactory.createCity("KK#", "Bush-Bush", country);
         assertNotNull(city);
         assertEquals("RT5", city.getCountyId());
-        System.out.println(country.getName());
+        System.out.println(country.getCountryName());
     }
 
     @Test

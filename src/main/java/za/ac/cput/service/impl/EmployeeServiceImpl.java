@@ -1,8 +1,7 @@
 package za.ac.cput.service.impl;
 
 import za.ac.cput.domain.Employee;
-import za.ac.cput.repository.EmployeeRepository;
-import za.ac.cput.service.EmployeeService;
+import za.ac.cput.service.service.EmployeeService;
 
 import java.util.List;
 

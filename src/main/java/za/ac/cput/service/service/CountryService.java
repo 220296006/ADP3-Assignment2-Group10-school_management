@@ -1,14 +1,18 @@
 package za.ac.cput.service.service;
-import za.ac.cput.domain.Country;
-import java.util.List;
-import java.util.Optional;
+
 /* ICountryService.java
  * CountryService Interface for the Country Entity
  * @Author: Thabiso Matsaba (220296006)
  * Date: 13 June 2022
  */
+import za.ac.cput.domain.Country;
+import za.ac.cput.service.IService;
 
-public interface CountryService extends IService<Country, Country.Id>{
-    List<Country>findAll();
-    List<Country> findById(String id);
+import java.util.List;
+
+public interface CountryService extends IService<Country,Country.CountryIdentity> {
+    List<Country> findAll();
+    //void deleteById(String id);
+    List<Country> findByCountryId(String countryId);
 }
+

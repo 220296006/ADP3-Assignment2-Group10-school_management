@@ -1,8 +1,7 @@
 package za.ac.cput.service.impl;
 
 import za.ac.cput.domain.EmployeeAddress;
-import za.ac.cput.repository.EmployeeAddressRepository;
-import za.ac.cput.service.IEmployeeAddressServices;
+import za.ac.cput.service.service.IEmployeeAddressServices;
 
 import java.util.ArrayList;
 

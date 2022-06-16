@@ -2,7 +2,7 @@ package za.ac.cput.service.impl;
 
 import za.ac.cput.domain.Name;
 import za.ac.cput.repository.NameRepository;
-import za.ac.cput.service.NameService;
+import za.ac.cput.service.service.NameService;
 
 import java.util.List;
 

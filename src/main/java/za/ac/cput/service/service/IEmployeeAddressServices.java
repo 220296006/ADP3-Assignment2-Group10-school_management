@@ -1,4 +1,4 @@
-package za.ac.cput.service;
+package za.ac.cput.service.service;
 
 import za.ac.cput.domain.EmployeeAddress;
 

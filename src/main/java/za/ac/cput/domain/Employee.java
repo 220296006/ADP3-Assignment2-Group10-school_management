@@ -7,6 +7,7 @@ package za.ac.cput.domain;
 
 import com.sun.istack.NotNull;
 
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
@@ -22,6 +23,7 @@ public class Employee {
     public String staffId;
     @NotNull
     public String email;
+    @Embedded
     public Name name;
 
     //builder constructor

@@ -1,108 +1,102 @@
 package za.ac.cput.domain;
+import com.sun.istack.NotNull;
+
+import javax.persistence.Embeddable;
 import javax.persistence.Entity;
-import javax.validation.constraints.NotNull;
+import javax.persistence.Id;
+import javax.persistence.IdClass;
 import java.io.Serializable;
 import java.util.Objects;
-import javax.persistence.Id;
+
 /* Country.java
  * Entity for the Country Domain
  * @Author: Thabiso Matsaba (220296006)
  * Date: 10 June 2022
  */
 @Entity
-public class Country  {
-
+@Embeddable
+@IdClass(Country.CountryIdentity.class)
+public class Country {
+    @com.sun.istack.NotNull
+    @Id
+    public String countryId;
     @NotNull
-    @javax.persistence.Id
-    private String id;
+    public String countryName;
 
-    @NotNull
-    private String name;
-
-    protected Country(){
+    protected Country(){}
+    public Country(Builder builder)
+    {
+        this.countryName=builder.countryName;
+        this.countryId=builder.countryId;
     }
 
-    private Country(Builder builder){
-        this.id = builder.id;
-        this.name = builder.name;
+    public String getCountryId() {
+        return countryId;
     }
 
-    public String getId() {
-        return id;
+    public String getCountryName() {
+        return countryName;
     }
 
-    public String getName() {
-        return name;
-    }
+    public static class Builder
+    {
+        public String countryId;
+        public String countryName;
 
-    @Override
-    public String toString() {
-        return "Country{" +
-                "id='" + id + '\'' +
-                ", name='" + name + '\'' +
-                '}';
-    }
-
-    public static class Builder{
-        private String id;
-        private String name;
-
-        public Builder setId(String id) {
-            this.id = id;
+        public Builder countryId(String countryId)
+        {
+            this.countryId =countryId;
             return this;
         }
 
-        public Builder setName(String name) {
-            this.name = name;
+        public Builder countryName(String countryName)
+        {
+            this.countryName=countryName;
             return this;
         }
 
-        public Builder copy(Country country){
-            this.id = country.id;
-            this.name = country.name;
+        public Builder copy(Country country)
+        {
+            this.countryId =country.countryId;
+            this.countryName=country.countryName;
             return this;
-
         }
 
         public Country build(){
-
             return new Country(this);
         }
     }
 
-    public static class Id {
-        private String id;
-
-        public Id(String id) {
-            this.id = id;
+    public static class CountryIdentity implements Serializable
+    {
+        public String countryId;
+        public CountryIdentity(String countryId){this.countryId=countryId;}
+        protected CountryIdentity(){}
+        public String getCountryId() {
+            return countryId;
         }
 
-        protected Id(){
-        }
-
-        public String getId() {
-            return id;
-        }
-
-        @Override
-        public boolean equals(Object o) {
-            if (this == o) return true;
-            if (o == null || getClass() !=o.getClass()) return false;
-            Id id = (Id) o;
-            return id.equals(id.id);
-        }
-
-        @Override
-        public int hashCode() {
-            return Objects.hash(id);
-        }
-
-        @Override
-        public String toString() {
-            return "Id{" +
-                    "id='" + id + '\'' +
-                    '}';
-        }
     }
+
+    @Override
+    public boolean equals(Object o)
+    {
+        if(this==o) return true;
+        if(o==null || getClass()!=o.getClass()) return false;
+        Country country=(Country) o;
+        return countryId.equals(country.countryId);
     }
+
+    @Override
+    public int hashCode(){return Objects.hash(countryId);}
+
+    @Override
+    public String toString() {
+        return "Country{" +
+                "countryId='" + countryId + '\'' +
+                ", countryName='" + countryName + '\'' +
+                '}';
+    }
+}
+
 
