@@ -17,6 +17,7 @@ import static org.junit.jupiter.api.Assertions.*;
 @SpringBootTest
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class AddressServiceImplTest {
+
     private final Address address= AddressFactory.build("test-unit-number","test-complex-number","test-street-Number","test-street=Name","1234");
     private Address.AddressId addressId=AddressFactory.buildId(this.address);
 
