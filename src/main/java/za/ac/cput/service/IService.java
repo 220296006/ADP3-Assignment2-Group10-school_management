@@ -1,7 +1,5 @@
 package za.ac.cput.service;
 
-/*Waseem Dollie - 216040566*/
-
 import java.util.Optional;
 
 public interface IService <T,ID> {
