@@ -1,29 +1,33 @@
 package za.ac.cput.domain;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.util.Objects;
+
 
 @Entity
-@Table(name = "city")
+@Embeddable
+@IdClass(City.CityId.class)
 public class City implements Serializable {
-    @Id
-    @Column
-    private String id;
-    @Column
-    private String name;
-    @Column
-    private String countryId;
+    @NotNull
+    @Id public String id;
+    @NotNull
+    public String name;
+
+    @Embedded
+    private Country country;
+
+    public Country getCountry() {
+        return country;
+    }
+    protected City() {
+    }
 
     private City(Builder builder) {
         this.id = builder.id;
         this.name = builder.name;
-        this.countryId = builder.countryId;
     }
-
-    public City() {}
 
     public String getId() {
         return id;
@@ -33,52 +37,59 @@ public class City implements Serializable {
         return name;
     }
 
-    public String getCountyId() {
-        return countryId;
-    }
-
-    @Override
-    public String toString() {
-        return "City{" + "id=" + id + ", name=" + name + ", country=" + countryId + '}';
-    }
-
     public static class Builder {
-        private String id, name;
-        private String countryId;
+        public String id;
+        public String name;
 
-        public Builder setId(String id) {
+        public City.Builder id(String id) {
             this.id = id;
             return this;
         }
 
-        public Builder setName(String name) {
+        public City.Builder name(String name) {
             this.name = name;
             return this;
         }
 
-        public Builder setCountry(String countryId) {
-            this.countryId = countryId;
-            return this;
-        }
-
-        public Builder copy(City city) {
+        public City.Builder copy(City city) {
             this.id = city.id;
             this.name = city.name;
-            this.countryId = city.countryId;
             return this;
         }
 
-        public City build() {
+        public City build(){
             return new City(this);
         }
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (o == null || this.getClass() != o.getClass()) return false;
-        if (this == o) return true;
-        City x = (City) o;
-        return this.id.equals(x.id) && this.name.equals(x.name) && this.countryId.equals(x.countryId);
+    public static class CityId implements Serializable
+    {
+        public String id;
+        public CityId(String id){this.id=id;}
+        protected CityId(){}
+        public String getId(){return id;}
     }
 
+    @Override
+    public boolean equals(Object o)
+    {
+        if(this==o) return true;
+        if(o==null || getClass()!=o.getClass()) return false;
+        City city=(City) o;
+        return id.equals(city.id);
+    }
+
+    @Override
+    public int hashCode(){return Objects.hash(id);}
+
+    @Override
+    public String toString()
+    {
+        return "City{" +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' + '}';
+    }
 }
+
+
+

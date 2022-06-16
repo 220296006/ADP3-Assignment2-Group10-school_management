@@ -8,9 +8,20 @@ import static org.junit.jupiter.api.Assertions.*;
 class EmployeeAddressFactoryTest {
 
     @Test
-    void createEmployeeAddress() {
-        EmployeeAddress employeeAddress = EmployeeAddressFactory.createEmployeeAddress("","5 Address Street");
+    public void buildWithSuccess()
+    {
+        EmployeeAddress employeeAddress=EmployeeAddressFactory
+                .build("test-id");
+        System.out.println(employeeAddress);
         assertNotNull(employeeAddress);
-        System.out.println(employeeAddress.toString());
     }
+    @Test
+    void buildWithError()
+    {
+        Exception exception=assertThrows(IllegalArgumentException.class,()-> EmployeeAddressFactory.build(null));
+        String exceptionMessage=exception.getMessage();
+        System.out.println(exceptionMessage);
+        assertSame("staff ID is required",exceptionMessage);
+    }
+
 }

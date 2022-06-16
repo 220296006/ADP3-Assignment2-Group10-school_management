@@ -7,22 +7,21 @@ import za.ac.cput.domain.Country;
 import static org.junit.jupiter.api.Assertions.*;
 
 class CityFactoryTest {
-
-    private static Country country = CountryFactory.createCountry("RT5", "Uganda");
-
     @Test
-    void createCitySuccess() throws IllegalArgumentException {
-        City city = CityFactory.createCity("KK#", "Bush-Bush", country);
+    public void buildWithSuccess()
+    {
+        City city=CityFactory
+                .build("Test-Id","Cape Town");
+        System.out.println(city);
         assertNotNull(city);
-        assertEquals("RT5", city.getCountyId());
-        System.out.println(country.getCountryName());
+    }
+    @Test
+    void buildWithError()
+    {
+        Exception exception=assertThrows(IllegalArgumentException.class,()-> CityFactory.build(null, "Cape Town"));
+        String exceptionMessage=exception.getMessage();
+        System.out.println(exceptionMessage);
+        assertSame("City ID is required!",exceptionMessage);
     }
 
-    @Test
-    void createCityFail() {
-        assertThrows(IllegalArgumentException.class, ()->{
-            CityFactory.createCity("KK#", " ", country);
-        });
-        System.out.println("Thrown an error as expected");
-    }
 }

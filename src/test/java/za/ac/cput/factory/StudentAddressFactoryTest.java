@@ -7,7 +7,7 @@ import za.ac.cput.domain.StudentAddress;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class StudentAddressFactoryTest {
+class StudentAddressFactoryTest {
     @Test
     public void buildWithSuccess()
     {
