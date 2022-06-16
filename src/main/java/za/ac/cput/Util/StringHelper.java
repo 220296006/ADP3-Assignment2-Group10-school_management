@@ -1,4 +1,4 @@
-package za.ac.cput;
+package za.ac.cput.Util;
 
 /*Waseem Dollie - 216040566*/
 

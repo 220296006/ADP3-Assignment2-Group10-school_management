@@ -1,10 +1,11 @@
-package za.ac.cput.service.impl;
+package za.ac.cput.service;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import za.ac.cput.domain.Country;
 import za.ac.cput.factory.CountryFactory;
-import za.ac.cput.service.CountryService;
+import za.ac.cput.service.service.CountryService;
+
 import java.util.List;
 import java.util.Optional;
 /* CountryServiceImp.java
@@ -13,7 +14,6 @@ import java.util.Optional;
  * Date: 15 June 2022
  */
 import static org.junit.jupiter.api.Assertions.*;
-import static za.ac.cput.util.GenericHelper.id;
 
 @SpringBootTest
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)

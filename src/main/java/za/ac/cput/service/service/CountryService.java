@@ -1,4 +1,4 @@
-package za.ac.cput.service;
+package za.ac.cput.service.service;
 import za.ac.cput.domain.Country;
 import java.util.List;
 import java.util.Optional;

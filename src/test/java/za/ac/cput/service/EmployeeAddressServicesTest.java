@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 import za.ac.cput.domain.EmployeeAddress;
 import za.ac.cput.factory.EmployeeAddressFactory;
-import za.ac.cput.repository.EmployeeAddressRepository;
+import za.ac.cput.service.impl.EmployeeAddressServices;
 
 import static org.junit.jupiter.api.Assertions.*;
 @TestMethodOrder(MethodOrderer.MethodName.class)

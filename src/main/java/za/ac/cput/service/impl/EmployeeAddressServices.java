@@ -1,12 +1,12 @@
-package za.ac.cput.service;
+package za.ac.cput.service.impl;
 
 import za.ac.cput.domain.EmployeeAddress;
 import za.ac.cput.repository.EmployeeAddressRepository;
+import za.ac.cput.service.IEmployeeAddressServices;
 
 import java.util.ArrayList;
-import java.util.List;
 
-public class EmployeeAddressServices implements IEmployeeAddressServices{
+public class EmployeeAddressServices implements IEmployeeAddressServices {
      private final EmployeeAddressRepository repository;
      private static  IEmployeeAddressServices SERVICES;
 

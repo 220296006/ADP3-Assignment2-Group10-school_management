@@ -4,14 +4,15 @@
  * Date: 15 June 2022
  */
 
-package za.ac.cput.service;
+package za.ac.cput.service.impl;
 
 import za.ac.cput.domain.Address;
 import za.ac.cput.repository.AddressRepository;
+import za.ac.cput.service.AddressService;
 
 import java.util.Optional;
 
-public class AddressServiceImp implements AddressService{
+public class AddressServiceImp implements AddressService {
     private final AddressRepository repository;
     private static AddressServiceImp SERVICE;
 

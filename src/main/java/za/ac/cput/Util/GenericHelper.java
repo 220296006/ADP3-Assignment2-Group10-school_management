@@ -1,4 +1,4 @@
-package za.ac.cput.util;
+package za.ac.cput.Util;
 import java.util.UUID;
 
 public class GenericHelper {

@@ -1,7 +1,8 @@
 package za.ac.cput.factory;
 import org.junit.jupiter.api.Test;
 import za.ac.cput.domain.Country;
-import static za.ac.cput.util.GenericHelper.id;
+
+import static za.ac.cput.Util.GenericHelper.id;
 /* CountryFactoryTest.java
  * CountryFactoryTest for the Country Entity
  * @Author: Thabiso Matsaba (220296006)

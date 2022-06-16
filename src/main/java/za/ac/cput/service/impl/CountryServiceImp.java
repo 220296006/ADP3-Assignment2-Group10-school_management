@@ -2,7 +2,7 @@ package za.ac.cput.service.impl;
 import org.springframework.stereotype.Service;
 import za.ac.cput.domain.Country;
 import za.ac.cput.repository.ICountryRepository;
-import za.ac.cput.service.CountryService;
+import za.ac.cput.service.service.CountryService;
 
 import java.util.Collections;
 import java.util.List;

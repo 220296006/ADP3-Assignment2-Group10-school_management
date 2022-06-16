@@ -1,13 +1,12 @@
-package za.ac.cput.service;
+package za.ac.cput.service.impl;
 
 import za.ac.cput.domain.Employee;
 import za.ac.cput.repository.EmployeeRepository;
+import za.ac.cput.service.EmployeeService;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
-public class EmployeeServiceImpl implements EmployeeService{
+public class EmployeeServiceImpl implements EmployeeService {
     private final EmployeeRepository repository;
    //also optional? SERVICE?
     private static EmployeeService SERVICE;
@@ -38,7 +37,7 @@ public class EmployeeServiceImpl implements EmployeeService{
 
     @Override
     public void delete(Employee employee) {
-        this,repository.delete(employee);
+        this.repository.delete(employee);
     }
 
     @Override

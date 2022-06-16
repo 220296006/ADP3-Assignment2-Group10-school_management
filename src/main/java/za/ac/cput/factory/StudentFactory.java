@@ -2,7 +2,7 @@ package za.ac.cput.factory;
 
 /*Waseem Dollie - 216040566*/
 
-import za.ac.cput.StringHelper;
+import za.ac.cput.Util.StringHelper;
 import za.ac.cput.domain.Student;
 
 public class StudentFactory {

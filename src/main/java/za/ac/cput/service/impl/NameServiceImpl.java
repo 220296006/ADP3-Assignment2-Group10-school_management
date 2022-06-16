@@ -1,11 +1,12 @@
-package za.ac.cput.service;
+package za.ac.cput.service.impl;
 
 import za.ac.cput.domain.Name;
 import za.ac.cput.repository.NameRepository;
+import za.ac.cput.service.NameService;
 
 import java.util.List;
 
-public class NameServiceImpl implements NameService{
+public class NameServiceImpl implements NameService {
     public final NameRepository repository;
 
     public NameServiceImpl(NameRepository repository){
