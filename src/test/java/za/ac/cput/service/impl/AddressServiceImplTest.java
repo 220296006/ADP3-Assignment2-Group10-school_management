@@ -18,48 +18,48 @@ import static org.junit.jupiter.api.Assertions.*;
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class AddressServiceImplTest {
 
-    private final Address address= AddressFactory.build("test-unit-number","test-complex-number","test-street-Number","test-street=Name","1234");
+    private final Address address= AddressFactory.build("7","bedford","326","Thornton","3698");
     private Address.AddressId addressId=AddressFactory.buildId(this.address);
 
     @Autowired
     private AddressService addrService;
 
-    @Test
     @Order(1)
+    @Test
     void save() {
-        Address saved=this.addrService.save(this.address);
+        Address create=this.addrService.save(this.address);
         assertAll(
-                ()->assertNotNull(saved),
-                ()->assertEquals(this.address,saved)
+                ()->assertNotNull(create),
+                ()->assertEquals(this.address,create)
         );
     }
 
-    @Test
     @Order(2)
+    @Test
     void read() {
-        Optional<Address> read=this.addrService.read(this.addressId);
-        System.out.println(read);
+        Optional<Address> view=this.addrService.read(this.addressId);
+        System.out.println(view);
         assertAll(
-                ()->assertTrue(read.isPresent()),
-                ()->assertEquals(this.address,read.get())
+                ()->assertTrue(view.isPresent()),
+                ()->assertEquals(this.address,view.get())
         );
     }
 
-    @Test
     @Order(4)
+    @Test
     void delete() {
         this.addrService.delete(this.address);
     }
 
-    @Test
     @Order(5)
+    @Test
     void findAll() {
         List<Address> addressList=this.addrService.findAll();
         assertEquals(0,addressList.size());
     }
 
-    @Test
     @Order(3)
+    @Test
     void findByUnitNumber() {
         String unitNumber=this.addressId.getUnitNumber();
         List<Address>addressList=this.addrService.findByUnitNumber(unitNumber);

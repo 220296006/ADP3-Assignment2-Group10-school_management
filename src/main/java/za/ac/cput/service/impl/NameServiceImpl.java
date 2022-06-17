@@ -13,16 +13,26 @@ import java.util.Optional;
 public class NameServiceImpl implements NameService {
     private final INameRepository repository;
     @Autowired
-    public NameServiceImpl(INameRepository repository){this.repository=repository;}
+    public NameServiceImpl(INameRepository repository){
+        this.repository=repository;
+    }
     @Override
-    public Name save(Name name){return this.repository.save(name);}
+    public Name save(Name name){
+        return this.repository.save(name);
+    }
 
     @Override
-    public Optional<Name> read(Name.NameId nameId){return this.repository.findById(nameId);}
+    public Optional<Name> read(Name.NameId nameId){
+        return this.repository.findById(nameId);
+    }
     @Override
-    public void delete(Name name){this.repository.delete(name);}
+    public void delete(Name name){
+        this.repository.delete(name);
+    }
     @Override
-    public List<Name>findAll(){return this.repository.findAll();}
+    public List<Name>findAll(){
+        return this.repository.findAll();
+    }
     /*@Override
      public void deleteById(String id)
      {
@@ -31,6 +41,8 @@ public class NameServiceImpl implements NameService {
      }
       */
     @Override
-    public List findByFirstName(String firstName){return this.repository.findByFirstName(firstName);}
+    public List findByFirstName(String firstName){
+        return this.repository.findByFirstName(firstName);
+    }
 }
 

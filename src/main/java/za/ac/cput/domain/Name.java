@@ -25,8 +25,7 @@ public class Name implements Serializable {
     @NotNull public String lastName,middleName;
 
     protected Name(){}
-    private Name(Builder builder)
-    {
+    private Name(Builder builder) {
         this.firstName=builder.firstName;
         this.lastName=builder.lastName;
         this.middleName=builder.middleName;
@@ -35,30 +34,25 @@ public class Name implements Serializable {
     public String getMiddleName(){return middleName;}
     public String getLastName(){return lastName;}
 
-    public static class Builder
-    {
+    public static class Builder {
         public String firstName;
         public String middleName;
         public String lastName;
 
-        public Builder firstName(String firstName)
-        {
+        public Builder firstName(String firstName) {
             this.firstName=firstName;
             return this;
         }
-        public Builder middleName(String middleName)
-        {
+        public Builder middleName(String middleName) {
             this.middleName=middleName;
             return this;
         }
-        public Builder lastName(String lastName)
-        {
+        public Builder lastName(String lastName) {
             this.lastName=lastName;
             return this;
         }
 
-        public Builder copy(Name name)
-        {
+        public Builder copy(Name name) {
             this.firstName=name.firstName;
             this.middleName=name.middleName;
             this.lastName=name.lastName;
@@ -66,16 +60,14 @@ public class Name implements Serializable {
         }
         public Name build(){return new Name(this);}
     }
-    public static class NameId implements  Serializable
-    {
+    public static class NameId implements  Serializable {
         public String firstName;
         public NameId(String firstName){this.firstName=firstName;}
         protected NameId(){}
         public String getFirstName(){return firstName;}
     }
     @Override
-    public boolean equals(Object o)
-    {
+    public boolean equals(Object o) {
         if(this==o) return true;
         if(o==null || getClass()!=o.getClass()) return false;
         Name name=(Name) o;
