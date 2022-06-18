@@ -6,8 +6,5 @@ import za.ac.cput.domain.EmployeeAddress;
 import java.util.List;
 
 @Repository
-public interface IEmployeeAddressRepository extends JpaRepository<EmployeeAddress,EmployeeAddress.EmployeeAddressId> {
-    List<EmployeeAddress>findAll();
-    List<EmployeeAddress>findByStaffId(String staffId);
-
+public interface IEmployeeAddressRepository extends JpaRepository<EmployeeAddress,String> {
 }

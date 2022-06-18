@@ -31,7 +31,7 @@ public class StudentAddressController {
     }
 
     @GetMapping("read/{studentId}")
-    public ResponseEntity<StudentAddress> read(@PathVariable StudentAddress.StudentAddressId studentAddressId)
+    public ResponseEntity<StudentAddress> read(@PathVariable String studentAddressId)
     {
         log.info("Read request:{}",studentAddressId);
         StudentAddress studentAddress=this.studentAddressService.read(studentAddressId)
@@ -39,16 +39,16 @@ public class StudentAddressController {
         return ResponseEntity.ok(studentAddress);
     }
     @DeleteMapping("delete/{studentId}")
-    public ResponseEntity<StudentAddress>delete(@PathVariable StudentAddress studentAddress)
+    public ResponseEntity<StudentAddress>delete(@PathVariable String studentAddressId)
     {
-        log.info("Read request:{}",studentAddress);
-        this.studentAddressService.delete(studentAddress);
+        log.info("Read request:{}",studentAddressId);
+        this.studentAddressService.deleteById(studentAddressId);
         return ResponseEntity.noContent().build();
     }
     @GetMapping("all")
     public ResponseEntity<List<StudentAddress>>findAll()
     {
-        List<StudentAddress>studentAddressList=this.studentAddressService.findAll();
+        List<StudentAddress>studentAddressList=this.studentAddressService.readAll();
         return ResponseEntity.ok(studentAddressList);
     }
 }

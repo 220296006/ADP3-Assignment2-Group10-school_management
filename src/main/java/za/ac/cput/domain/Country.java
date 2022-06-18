@@ -13,19 +13,18 @@ import java.util.Objects;
  * @Author: Thabiso Matsaba (220296006)
  * Date: 10 June 2022
  */
-@Entity
-@Embeddable
-@IdClass(Country.CountryIdentity.class)
-public class Country {
-    @com.sun.istack.NotNull
-    @Id
-    public String countryId;
-    @NotNull
-    public String countryName;
 
-    protected Country(){}
-    public Country(Builder builder)
-    {
+@Entity
+public class Country implements Serializable {
+    @NotNull
+    @Id
+    private String countryId;
+    @NotNull
+    private String countryName;
+
+    public Country(){}
+
+    public Country(Builder builder) {
         this.countryName=builder.countryName;
         this.countryId=builder.countryId;
     }
@@ -38,25 +37,40 @@ public class Country {
         return countryName;
     }
 
-    public static class Builder
-    {
+    @Override
+    public boolean equals(Object o) {
+        if(this==o) return true;
+        if(o==null || getClass()!=o.getClass()) return false;
+        Country country=(Country) o;
+        return countryId.equals(country.countryId) && countryName.equals(country.countryName);
+    }
+
+    @Override
+    public int hashCode(){return Objects.hash(countryId, countryName);}
+
+    @Override
+    public String toString() {
+        return "Country{" +
+                "countryId='" + countryId + '\'' +
+                ", countryName='" + countryName + '\'' +
+                '}';
+    }
+
+    public static class Builder {
         public String countryId;
         public String countryName;
 
-        public Builder countryId(String countryId)
-        {
+        public Builder countryId(String countryId) {
             this.countryId =countryId;
             return this;
         }
 
-        public Builder countryName(String countryName)
-        {
+        public Builder countryName(String countryName) {
             this.countryName=countryName;
             return this;
         }
 
-        public Builder copy(Country country)
-        {
+        public Builder copy(Country country) {
             this.countryId =country.countryId;
             this.countryName=country.countryName;
             return this;
@@ -67,36 +81,7 @@ public class Country {
         }
     }
 
-    public static class CountryIdentity implements Serializable
-    {
-        public String countryId;
-        public CountryIdentity(String countryId){this.countryId=countryId;}
-        protected CountryIdentity(){}
-        public String getCountryId() {
-            return countryId;
-        }
 
-    }
-
-    @Override
-    public boolean equals(Object o)
-    {
-        if(this==o) return true;
-        if(o==null || getClass()!=o.getClass()) return false;
-        Country country=(Country) o;
-        return countryId.equals(country.countryId);
-    }
-
-    @Override
-    public int hashCode(){return Objects.hash(countryId);}
-
-    @Override
-    public String toString() {
-        return "Country{" +
-                "countryId='" + countryId + '\'' +
-                ", countryName='" + countryName + '\'' +
-                '}';
-    }
 }
 
 

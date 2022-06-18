@@ -5,8 +5,7 @@ import za.ac.cput.service.IService;
 
 import java.util.List;
 
-public interface CityService extends IService<City,City.CityId> {
-    List<City> findAll();
-    //void deleteById(String id);
-    List<City> findById(String id);
+public interface CityService extends IService<City,String> {
+    List<City> readAll();
+    void deleteById(String id);
 }

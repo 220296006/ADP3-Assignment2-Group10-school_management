@@ -7,7 +7,10 @@ import org.junit.jupiter.api.TestMethodOrder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import za.ac.cput.domain.Employee;
+import za.ac.cput.domain.Name;
+import za.ac.cput.domain.Student;
 import za.ac.cput.factory.EmployeeFactory;
+import za.ac.cput.factory.NameFactory;
 import za.ac.cput.service.service.EmployeeService;
 
 import java.util.List;
@@ -19,8 +22,8 @@ import static org.junit.jupiter.api.Assertions.*;
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class EmployeeServiceImplTest {
 
-    private final Employee employee = EmployeeFactory.build("001","randomemail@gmail.com");
-    private Employee.EmployeeId employeeId = EmployeeFactory.buildId(this.employee);
+    private final Name name = NameFactory.build("Zaeem","a","Petersen");
+    private final Employee employee = EmployeeFactory.build("1","randomemail@gmail.com",name);
 
     @Autowired
     private EmployeeService empService;
@@ -28,43 +31,40 @@ class EmployeeServiceImplTest {
     @Order(1)
     @Test
     void save() {
-        Employee saved = this.empService.save(this.employee);
-        assertAll(
-                ()->assertNotNull(saved),
-                ()->assertEquals(this.employee,saved)
-        );
+        Employee create = this.empService.save(this.employee);
+        assertEquals(this.employee,create);
+        System.out.println(create);
     }
 
     @Order(2)
     @Test
     void read() {
-        Optional<Employee> view=this.empService.read(this.employeeId);
-        System.out.println(view);
+        Optional<Employee> view = this.empService.read(this.employee.getStaffId());
         assertAll(
-                ()->assertTrue(view.isPresent()),
-                ()->assertEquals(this.employee,view.get())
+                ()-> assertTrue(view.isPresent()),
+                ()-> assertEquals(this.employee,view.get())
         );
+    }
+
+    /*@Test
+    void delete() {
+        empService.delete(employee);
+        List<Employee> employeeList = this.empService.readAll();
+        System.out.println(employeeList);
+    }*/
+
+    @Order(3)
+    @Test
+    void readAll() {
+        List<Employee> employeeList = this.empService.readAll();
+        assertEquals(1,employeeList.size());
     }
 
     @Order(4)
     @Test
-    void delete() {
-        this.empService.delete(this.employee);
-    }
-
-    @Order(5)
-    @Test
-    void findAll() {
-        List<Employee> employeeList=this.empService.findAll();
-        assertEquals(0,employeeList.size());
-    }
-
-    @Order(3)
-    @Test
-    void findByStaffId() {
-        String staffId=this.employeeId.getStaffId();
-        List<Employee>employeeList=this.empService.findByStaffId(staffId);
+    void deleteById() {
+        empService.deleteById("1");
+        List<Employee> employeeList = this.empService.readAll();
         System.out.println(employeeList);
-        assertSame(1,employeeList.size());
     }
 }

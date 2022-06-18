@@ -7,6 +7,7 @@ import org.junit.jupiter.api.TestMethodOrder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import za.ac.cput.domain.Country;
+import za.ac.cput.domain.Student;
 import za.ac.cput.factory.CountryFactory;
 import za.ac.cput.service.service.CountryService;
 
@@ -18,53 +19,46 @@ import static org.junit.jupiter.api.Assertions.*;
 @SpringBootTest
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class CountryServiceImplTest {
- private final Country country = CountryFactory.build("ID1", "Japan");
 
- private Country.CountryIdentity countryIdentity = CountryFactory.buildId(this.country);
+    private final Country country = CountryFactory.build("ID1", "Japan");
 
- @Autowired
- private CountryService countryService;
+    @Autowired
+    private CountryService countryService;
 
     @Order(1)
     @Test
     void save() {
-        Country create = this.countryService.save(this.country);
-        assertAll(
-                ()->assertNotNull(create),
-                ()->assertEquals(this.country,create)
-        );
+        Country create = countryService.save(this.country);
+        assertEquals(this.country, create);
+        System.out.println(create);
     }
 
     @Order(2)
     @Test
     void read() {
-        Optional<Country> view = this.countryService.read(this.countryIdentity);
-        System.out.println(view);
+        Optional<Country> view = this.countryService.read(this.country.getCountryId());
         assertAll(
-                ()->assertTrue(view.isPresent()),
-                ()->assertEquals(this.country,view.get())
+                ()-> assertTrue(view.isPresent()),
+                ()-> assertEquals(this.country,view.get())
         );
+    }
+
+/*    @Test
+    void delete() {
+    }*/
+
+    @Order(3)
+    @Test
+    void readAll() {
+        List<Country> countryList = this.countryService.readAll();
+        assertEquals(1,countryList.size());
     }
 
     @Order(4)
     @Test
-    void delete() {
-        this.countryService.delete(this.country);
-    }
-
-    @Order(5)
-    @Test
-    void findAll() {
-        List<Country> countryList=this.countryService.findAll();
-        assertEquals(0,countryList.size());
-    }
-
-    @Order(3)
-    @Test
-    void findByCountryId() {
-        String countryId=this.countryIdentity.getCountryId();
-        List<Country>countryList=this.countryService.findByCountryId(countryId);
+    void deleteById() {
+        countryService.deleteById("ID1");
+        List<Country> countryList = this.countryService.readAll();
         System.out.println(countryList);
-        assertSame(1,countryList.size());
     }
 }

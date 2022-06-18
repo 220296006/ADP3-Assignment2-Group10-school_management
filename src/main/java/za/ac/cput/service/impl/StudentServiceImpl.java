@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Optional;
 @Service
 public class StudentServiceImpl implements StudentService {
+
     private final IStudentRepository repository;
 
     @Autowired
@@ -19,32 +20,30 @@ public class StudentServiceImpl implements StudentService {
     {
         this.repository=repository;
     }
+
     @Override
-    public Student save(Student student)
-    {
+    public Student save(Student student) {
         return this.repository.save(student);
     }
-    @Override
-    public Optional<Student> read(Student.StudentId studentId){return this.repository.findById(studentId);}
 
     @Override
-    public void delete(Student student){this.repository.delete(student);}
-    @Override
-    public List<Student> findAll(){return this.repository.findAll();}
-
-    /*
-    @Override
-    public void deleteById(String id)
-    {
-        Optional<Student>student=read(id);
-        if(student.isPresent())delete(student.get());
+    public Optional<Student> read(String s) {
+        return this.repository.findById(s);
     }
 
-     */
+    @Override
+    public void delete(Student student) {
+        this.repository.delete(student);
+    }
 
     @Override
-    public List findByStudentId(String studentId)
-    {
-        return this.repository.findByStudentId(studentId);
+    public void deleteById(String id) {
+        Optional<Student> student = read(id);
+        student.ifPresent(this::delete);
+    }
+
+    @Override
+    public List<Student> readAll() {
+        return this.repository.findAll();
     }
 }

@@ -3,67 +3,50 @@ package za.ac.cput.domain;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.IdClass;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
-import java.util.Locale;
 import java.util.Objects;
 
 @Entity
-@IdClass(EmployeeAddress.EmployeeAddressId.class)
 public class EmployeeAddress implements Serializable {
     @NotNull
     @Id
-    public String staffId;
+    private String staffId;
 
-
+    @NotNull
     @Embedded
     private Address address;
+
     public Address getAddress()
     {
         return address;
     }
-    protected EmployeeAddress(){}
+
+    protected EmployeeAddress(){
+
+    }
+
     private EmployeeAddress(Builder builder)
     {
-        this.staffId=builder.staffId;
+        this.staffId = builder.staffId;
+        this.address = builder.address;
     }
-    public String getStaffId(){return staffId;}
 
-
-    public static class Builder
-    {
-        public String staffId;
-
-        public Builder staffId(String staffId)
-        {
-            this.staffId=staffId;
-            return this;
-        }
-        public Builder copy(EmployeeAddress employeeAddress)
-        {
-            this.staffId=employeeAddress.staffId;
-            return this;
-        }
-        public EmployeeAddress build(){return new EmployeeAddress(this);}
+    public String getStaffId(){
+        return staffId;
     }
-    public static class EmployeeAddressId implements Serializable
-    {
-        public String staffId;
-        public EmployeeAddressId(String staffId){this.staffId=staffId;}
-        protected EmployeeAddressId(){}
-        public String getStaffId(){return staffId;}
-    }
+
     @Override
-    public boolean equals(Object o)
-    {
+    public boolean equals(Object o) {
         if(this==o) return true;
         if(o==null || getClass()!=o.getClass()) return false;
         EmployeeAddress employeeAddress=(EmployeeAddress) o;
-        return staffId.equals(employeeAddress.staffId);
+        return staffId.equals(employeeAddress.staffId) && address.equals(employeeAddress.address);
     }
     @Override
-    public int hashCode(){return Objects.hash(staffId);}
+    public int hashCode(){
+        return Objects.hash(staffId, address);
+    }
 
     @Override
     public String toString()
@@ -71,4 +54,32 @@ public class EmployeeAddress implements Serializable {
         return "EmployeeAddress{" +
                 "staffId='" + staffId + '\'' + '}';
     }
+
+    public static class Builder
+    {
+        private String staffId;
+        private Address address;
+
+        public Builder setStaffId(String staffId)
+        {
+            this.staffId=staffId;
+            return this;
+        }
+
+        public Builder setAddress(Address address){
+            this.address = address;
+            return this;
+        }
+
+        public Builder copy(EmployeeAddress employeeAddress)
+        {
+            this.staffId=employeeAddress.staffId;
+            this.address = employeeAddress.address;
+            return this;
+        }
+        public EmployeeAddress build(){
+            return new EmployeeAddress(this);
+        }
+    }
+
 }

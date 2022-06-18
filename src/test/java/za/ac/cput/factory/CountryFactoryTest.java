@@ -15,7 +15,7 @@ class CountryFactoryTest {
     public void buildWithSuccess()
     {
         Country country=CountryFactory
-                .build("Test-Id","South Africa");
+                .build("03","South Africa");
         System.out.println(country);
         assertNotNull(country);
     }
@@ -25,7 +25,7 @@ class CountryFactoryTest {
         Exception exception=assertThrows(IllegalArgumentException.class,()-> CountryFactory.build(null, "South Africa"));
         String exceptionMessage=exception.getMessage();
         System.out.println(exceptionMessage);
-        assertSame("Country ID is required!",exceptionMessage);
+        assertSame("Country ID is null",exceptionMessage);
     }
 
 }

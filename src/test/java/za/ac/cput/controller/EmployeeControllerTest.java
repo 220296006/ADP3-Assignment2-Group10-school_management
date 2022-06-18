@@ -8,7 +8,9 @@ import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import za.ac.cput.domain.Employee;
+import za.ac.cput.domain.Name;
 import za.ac.cput.factory.EmployeeFactory;
+import za.ac.cput.factory.NameFactory;
 
 import java.util.Arrays;
 
@@ -22,12 +24,14 @@ class EmployeeControllerTest {
     @Autowired private EmployeeController controller;
     @Autowired private TestRestTemplate restTemplate;
     private Employee employee;
+    private Name name;
     private String baseUrl;
 
     @BeforeEach
     void setUp()
     {
-        this.employee= EmployeeFactory.build("test-id-1","warrenjaftha16@gmail.com");
+        this.name = NameFactory.build("max", "", "jacobs");
+        this.employee= EmployeeFactory.build("7","adp3@gmail.com", name);
         this.baseUrl="http://localhost:" + this.port + "/schoolmanagement/employee/";
     }
     @Test
@@ -49,7 +53,9 @@ class EmployeeControllerTest {
     void delete()
     {
         String url=baseUrl + "delete/" + this.employee.getStaffId();
-        this.restTemplate.delete(url,controller.delete(employee));
+        System.out.println(url);
+        this.restTemplate.delete(url,controller.delete(url));
+
 
     }
     @Test

@@ -10,9 +10,8 @@ import za.ac.cput.service.IService;
 
 import java.util.List;
 
-public interface CountryService extends IService<Country,Country.CountryIdentity> {
-    List<Country> findAll();
-    //void deleteById(String id);
-    List<Country> findByCountryId(String countryId);
+public interface CountryService extends IService<Country,String> {
+    List<Country> readAll();
+    void deleteById(String id);
 }
 

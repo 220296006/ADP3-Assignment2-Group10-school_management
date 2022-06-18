@@ -1,20 +1,20 @@
 package za.ac.cput.factory;
 
+import za.ac.cput.Util.GenericHelper;
+import za.ac.cput.domain.Address;
 import za.ac.cput.domain.EmployeeAddress;
-import za.ac.cput.util.IlyaasHelper;
 
 public class EmployeeAddressFactory {
-    public static EmployeeAddress build(String staffId)
+    public static EmployeeAddress build(String staffId, Address address)
     {
-        if(staffId==null || staffId.isEmpty())
-            throw new IllegalArgumentException("staffId is required");
-        return new EmployeeAddress.Builder().staffId(staffId)
-                .build();
-    }
-    public static EmployeeAddress.EmployeeAddressId buildId(EmployeeAddress employeeAddress)
-    {
-        return new EmployeeAddress.EmployeeAddressId(employeeAddress.getStaffId());
-    }
+        if(GenericHelper.isNullorEmpty(staffId))
+            throw new IllegalArgumentException("staff id is null or empty");
+        if(GenericHelper.addressisNullorEmpty(address))
+            throw new IllegalArgumentException("address is null or empty");
 
+        return new EmployeeAddress.Builder().setStaffId(staffId)
+                                            .setAddress(address)
+                                            .build();
+    }
 
 }

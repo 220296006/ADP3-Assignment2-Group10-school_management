@@ -31,7 +31,7 @@ public class EmployeeController {
     }
 
     @GetMapping("read/{employeeId}")
-    public ResponseEntity<Employee> read(@PathVariable Employee.EmployeeId employeeId)
+    public ResponseEntity<Employee> read(@PathVariable String employeeId)
     {
         log.info("Read request:{}",employeeId);
         Employee employee=this.employeeService.read(employeeId)
@@ -39,16 +39,16 @@ public class EmployeeController {
         return ResponseEntity.ok(employee);
     }
     @DeleteMapping("delete/{employeeId}")
-    public ResponseEntity<Employee>delete(@PathVariable Employee employee)
+    public ResponseEntity<Employee>delete(@PathVariable String employeeId)
     {
-        log.info("Read request:{}",employee);
-        this.employeeService.delete(employee);
+        log.info("Read request:{}",employeeId);
+        this.employeeService.deleteById(employeeId);
         return ResponseEntity.noContent().build();
     }
     @GetMapping("all")
     public ResponseEntity<List<Employee>>findAll()
     {
-        List<Employee>employeeList=this.employeeService.findAll();
+        List<Employee>employeeList=this.employeeService.readAll();
         return ResponseEntity.ok(employeeList);
     }
 }

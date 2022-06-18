@@ -1,6 +1,7 @@
 package za.ac.cput.controller;
 
-/*Waseem Dollie - 216040566*/
+//Waseem Dollie - 216040566
+
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,24 +34,23 @@ public class StudentController {
     }
 
     @GetMapping("read/{studentId}")
-    public ResponseEntity<Student> read(@PathVariable Student.StudentId studentId)
+    public ResponseEntity<Student> read(@PathVariable String studentId)
     {
         log.info("Read request:{}",studentId);
-        Student student=this.studentService.read(studentId)
-                .orElseThrow(()->new ResponseStatusException(HttpStatus.NOT_FOUND));
+        Student student=this.studentService.read(studentId).orElseThrow(()->new ResponseStatusException(HttpStatus.NOT_FOUND));
         return ResponseEntity.ok(student);
     }
     @DeleteMapping("delete/{studentId}")
-    public ResponseEntity<Student>delete(@PathVariable Student student)
+    public ResponseEntity<Void>delete(@PathVariable String studentId)
     {
-        log.info("Read request:{}",student);
-        this.studentService.delete(student);
+        log.info("Read request:{}",studentId);
+        this.studentService.deleteById(studentId);
         return ResponseEntity.noContent().build();
     }
     @GetMapping("all")
     public ResponseEntity<List<Student>>findAll()
     {
-        List<Student>studentList=this.studentService.findAll();
+        List<Student>studentList=this.studentService.readAll();
         return ResponseEntity.ok(studentList);
     }
 }

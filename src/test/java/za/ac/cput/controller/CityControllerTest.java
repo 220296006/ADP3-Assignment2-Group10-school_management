@@ -10,7 +10,9 @@ import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import za.ac.cput.domain.City;
+import za.ac.cput.domain.Country;
 import za.ac.cput.factory.CityFactory;
+import za.ac.cput.factory.CountryFactory;
 
 import java.util.Arrays;
 
@@ -24,12 +26,14 @@ class CityControllerTest {
     @Autowired private CityController cityController;
     @Autowired private TestRestTemplate restTemplate;
     private City city;
+    private Country country;
     private String baseUrl;
 
     @BeforeEach
     void setUp()
     {
-        this.city= CityFactory.build("student-id-1","waseem.dollie.wd@gmail.com");
+        country = CountryFactory.build("2","2");
+        this.city= CityFactory.build("id","waseem.dollie.wd@gmail.com", country);
         this.baseUrl="http://localhost:" + this.port + "/schoolmanagement/city/";
     }
     @Test
@@ -51,7 +55,7 @@ class CityControllerTest {
     void delete()
     {
         String url=baseUrl + "delete/" + this.city.getId();
-        this.restTemplate.delete(url,cityController.delete(city));
+        this.restTemplate.delete(url,cityController.delete(url));
 
     }
     @Test
@@ -81,7 +85,7 @@ class CityControllerTest {
         System.out.println(Arrays.asList(response.getBody()));
         assertAll(
                 ()->assertEquals(HttpStatus.OK,response.getStatusCode()),
-                ()->assertTrue(response.getBody().length==0)
+                ()->assertTrue(response.getBody().length==1)
         );
     }
 }

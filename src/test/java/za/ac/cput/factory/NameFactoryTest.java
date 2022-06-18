@@ -9,17 +9,17 @@ class NameFactoryTest {
     @Test
     public void buildWithSuccess()
     {
-        Name name=NameFactory.build("Zelino","none","Pestana");
+        Name name=NameFactory.build("John","","Doe");
         System.out.println(name);
         assertNotNull(name);
     }
     @Test
     void buildwithError()
     {
-        Exception exception=assertThrows(IllegalArgumentException.class,()->NameFactory.build(null,"none","Pestana"));
+        Exception exception=assertThrows(IllegalArgumentException.class,()->NameFactory.build(null,"","Doe"));
         String exceptionMessage=exception.getMessage();
         System.out.println(exceptionMessage);
-        assertSame("First Name is required",exceptionMessage);
+        assertSame("First Name is null",exceptionMessage);
     }
 
 }

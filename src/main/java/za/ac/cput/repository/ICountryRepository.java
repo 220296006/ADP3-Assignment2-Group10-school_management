@@ -11,7 +11,5 @@ import java.util.Optional;
  * Date: 13 June 2022
  */
 @Repository
-public interface ICountryRepository extends JpaRepository<Country,Country.CountryIdentity> {
-    List<Country> findAll();
-    List<Country> findByCountryId(String countryId);
+public interface ICountryRepository extends JpaRepository<Country, String> {
 }

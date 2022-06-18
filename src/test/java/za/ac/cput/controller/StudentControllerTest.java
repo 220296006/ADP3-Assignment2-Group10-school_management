@@ -7,7 +7,9 @@ import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import za.ac.cput.domain.Name;
 import za.ac.cput.domain.Student;
+import za.ac.cput.factory.NameFactory;
 import za.ac.cput.factory.StudentFactory;
 
 import java.util.Arrays;
@@ -22,12 +24,14 @@ class StudentControllerTest {
     @Autowired public StudentController studentController;
     @Autowired public TestRestTemplate restTemplate;
     public Student student;
+    public Name name;
     public String baseUrl;
 
     @BeforeEach
     void setUp()
     {
-        this.student= StudentFactory.build("student-id-1","waseem.dollie.wd@gmail.com");
+        this.name = NameFactory.build("waseem", "", "Dollie");
+        this.student= StudentFactory.build("1","waseem.dollie.wd@gmail.com", name);
         this.baseUrl="http://localhost:" + this.port + "/schoolmanagement/student/";
     }
     @Test
@@ -35,8 +39,7 @@ class StudentControllerTest {
     void save() {
         String url = baseUrl + "save";
         System.out.println(url);
-        ResponseEntity<Student> response = this.restTemplate
-                .postForEntity(url, this.student, Student.class);
+        ResponseEntity<Student> response = this.restTemplate.postForEntity(url, this.student, Student.class);
         System.out.println(response);
         assertAll(
                 () -> assertEquals(HttpStatus.OK, response.getStatusCode()),
@@ -49,7 +52,7 @@ class StudentControllerTest {
     void delete()
     {
         String url=baseUrl + "delete/" + this.student.getStudentId();
-        this.restTemplate.delete(url,studentController.delete(student));
+        this.restTemplate.delete(url,studentController.delete(url));
 
     }
     @Test
@@ -57,8 +60,7 @@ class StudentControllerTest {
     void read() {
         String url=baseUrl + "read/" + this.student.getStudentId();
         System.out.println(url);
-        ResponseEntity<Student>response=
-                this.restTemplate.getForEntity(url,Student.class);
+        ResponseEntity<Student> response = this.restTemplate.getForEntity(url,Student.class);
         System.out.println(response);
         assertAll(
                 ()->assertEquals(HttpStatus.OK,response.getStatusCode()),
@@ -74,12 +76,11 @@ class StudentControllerTest {
     {
         String url=baseUrl +"all";
         System.out.println(url);
-        ResponseEntity<Student[]>response=
-                this.restTemplate.getForEntity(url,Student[].class);
+        ResponseEntity<Student[]>response=this.restTemplate.getForEntity(url,Student[].class);
         System.out.println(Arrays.asList(response.getBody()));
         assertAll(
                 ()->assertEquals(HttpStatus.OK,response.getStatusCode()),
-                ()->assertTrue(response.getBody().length==0)
+                ()->assertTrue(response.getBody().length==1)
         );
     }
 }

@@ -30,25 +30,26 @@ public class CountryController {
         return ResponseEntity.ok(save);
     }
 
-    @GetMapping("read/{countryId}")
-    public ResponseEntity<Country> read(@PathVariable Country.CountryIdentity countryIdentity)
+    @GetMapping("read/{id}")
+    public ResponseEntity<Country> read(@PathVariable String id)
     {
-        log.info("Read request:{}",countryIdentity);
-        Country student=this.countryService.read(countryIdentity)
+        log.info("Read request:{}",id);
+        Country student=this.countryService.read(id)
                 .orElseThrow(()->new ResponseStatusException(HttpStatus.NOT_FOUND));
         return ResponseEntity.ok(student);
     }
-    @DeleteMapping("delete/{countryId}")
-    public ResponseEntity<Country>delete(@PathVariable Country country)
+
+    @DeleteMapping("delete/{id}")
+    public ResponseEntity<Void>delete(@PathVariable String id)
     {
-        log.info("Read request:{}",country);
-        this.countryService.delete(country);
+        log.info("Read request:{}",id);
+        this.countryService.deleteById(id);
         return ResponseEntity.noContent().build();
     }
     @GetMapping("all")
     public ResponseEntity<List<Country>>findAll()
     {
-        List<Country>countryList=this.countryService.findAll();
+        List<Country>countryList=this.countryService.readAll();
         return ResponseEntity.ok(countryList);
     }
 }

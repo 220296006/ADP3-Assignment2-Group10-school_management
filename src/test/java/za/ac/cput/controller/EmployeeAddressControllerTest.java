@@ -7,7 +7,13 @@ import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import za.ac.cput.domain.Address;
+import za.ac.cput.domain.City;
+import za.ac.cput.domain.Country;
 import za.ac.cput.domain.EmployeeAddress;
+import za.ac.cput.factory.AddressFactory;
+import za.ac.cput.factory.CityFactory;
+import za.ac.cput.factory.CountryFactory;
 import za.ac.cput.factory.EmployeeAddressFactory;
 
 import java.util.Arrays;
@@ -21,12 +27,18 @@ class EmployeeAddressControllerTest {
     @Autowired private EmployeeAddressController controller;
     @Autowired private TestRestTemplate restTemplate;
     private EmployeeAddress employeeAddress;
+    private Address address;
+    private City city;
+    private Country country;
     private String baseUrl;
 
     @BeforeEach
     void setUp()
     {
-        this.employeeAddress= EmployeeAddressFactory.build("test-id");
+        this.country = CountryFactory.build("9", "Japan");
+        this.city = CityFactory.build("9", "kyoto", country);
+        this.address = AddressFactory.build("6", "qwerty", "5", "aaaa","4568", city);
+        this.employeeAddress= EmployeeAddressFactory.build("1", address);
         this.baseUrl="http://localhost:"+ this.port + "/schoolmanagement/employee-address/";
     }
     @Test
@@ -62,7 +74,7 @@ class EmployeeAddressControllerTest {
     void delete()
    {
        String url=baseUrl + "delete/" + this.employeeAddress.getStaffId();
-       this.restTemplate.delete(url,controller.delete(employeeAddress));
+       this.restTemplate.delete(url,controller.delete(url));
    }
    @Test
     @Order(3)

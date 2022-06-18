@@ -1,22 +1,20 @@
 package za.ac.cput.factory;
 
+import za.ac.cput.Util.GenericHelper;
 import za.ac.cput.domain.City;
 import za.ac.cput.domain.Country;
 
 
 public class CityFactory {
-    public static City build(String id, String name)
-    {
-        if(id ==null ||id.isEmpty() )
-            throw new IllegalArgumentException("City Id is required!");
-        if( name ==null||name.isEmpty() )
-            throw new IllegalArgumentException("Name is required!");
-        return new City.Builder().id(id)
-                .name(name).build();
+    public static City build(String id, String name, Country country){
 
-    }
-    public static City.CityId buildId(City city)
-    {
-        return new City.CityId(city.getId());
+        if(GenericHelper.isNullorEmpty(id)|| GenericHelper.isNullorEmpty(name))
+            throw new IllegalArgumentException("id or name is null or empty");
+
+        return new City.Builder().setId(id)
+                                .setName(name)
+                                .setCountry(country)
+                                .build();
+
     }
 }

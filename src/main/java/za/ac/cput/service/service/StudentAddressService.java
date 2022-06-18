@@ -7,8 +7,8 @@ import za.ac.cput.service.IService;
 
 import java.util.List;
 
-public interface StudentAddressService extends IService<StudentAddress,StudentAddress.StudentAddressId> {
-    List<StudentAddress> findAll();
-    //void deleteById(String id);
-    List<StudentAddress> findByStudentId(String studentId);
+public interface StudentAddressService extends IService<StudentAddress,String> {
+    List<StudentAddress> readAll();
+    void deleteById(String id);
+
 }

@@ -4,6 +4,7 @@ package za.ac.cput.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import za.ac.cput.domain.Student;
 import za.ac.cput.domain.StudentAddress;
 import za.ac.cput.repository.IStudentAddressRepository;
 import za.ac.cput.service.service.StudentAddressService;
@@ -13,6 +14,7 @@ import java.util.Optional;
 
 @Service
 public class StudentAddressServiceImpl implements StudentAddressService {
+
     private final IStudentAddressRepository repository;
 
     @Autowired
@@ -20,37 +22,31 @@ public class StudentAddressServiceImpl implements StudentAddressService {
     {
         this.repository=repository;
     }
+
     @Override
     public StudentAddress save(StudentAddress studentAddress) {
-
         return this.repository.save(studentAddress);
     }
 
     @Override
-    public Optional<StudentAddress> read(StudentAddress.StudentAddressId studentAddressId){return this.repository.findById(studentAddressId);}
+    public Optional<StudentAddress> read(String s) {
+        return this.repository.findById(s);
+    }
 
     @Override
     public void delete(StudentAddress studentAddress) {
         this.repository.delete(studentAddress);
+
+    }
+
+    @Override
+    public List<StudentAddress> readAll() {
+        return this.repository.findAll();
     }
 
     @Override
-    public List<StudentAddress> findAll(){return this.repository.findAll();}
-
-    /*
-    @Override
-    public void deleteById(String id)
-    {
-        Optional<StudentAddress> addressType=read(id);
-        if(addressType.isPresent()) delete(addressType.get());
-
-    }
-     */
-
-    @Override
-    public List findByStudentId(String studentId)
-    {
-        return this.repository.findByStudentId(studentId);
-
+    public void deleteById(String id) {
+        Optional<StudentAddress> studentAddr = read(id);
+        studentAddr.ifPresent(this::delete);
     }
 }

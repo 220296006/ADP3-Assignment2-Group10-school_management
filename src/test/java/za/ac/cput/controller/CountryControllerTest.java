@@ -29,7 +29,7 @@ class CountryControllerTest {
     @BeforeEach
     void setUp()
     {
-        this.country= CountryFactory.build("student-id-1","nawaazamien9@gmail.com");
+        this.country= CountryFactory.build("Name","email123@gmail.com");
         this.baseUrl="http://localhost:" + this.port + "/schoolmanagement/country/";
     }
     @Test
@@ -47,11 +47,12 @@ class CountryControllerTest {
         );
     }
     @Test
-    @Order(4)
+    @Order(3)
     void delete()
     {
         String url=baseUrl + "delete/" + this.country.getCountryId();
-        this.restTemplate.delete(url,countryController.delete(country));
+        System.out.println(url);
+        this.restTemplate.delete(url);
 
     }
     @Test
@@ -71,7 +72,7 @@ class CountryControllerTest {
 
 
     @Test
-    @Order(3)
+    @Order(4)
     void findAll()
     {
         String url=baseUrl +"all";

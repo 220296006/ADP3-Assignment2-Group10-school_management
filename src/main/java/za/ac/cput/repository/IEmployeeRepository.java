@@ -8,10 +8,7 @@ import java.util.List;
 import java.util.Set;
 
 @Repository
-public interface IEmployeeRepository extends JpaRepository<Employee, Employee.EmployeeId>{
-
-    List<Employee> findAll();
-    List<Employee>findByStaffId(String staffId);
+public interface IEmployeeRepository extends JpaRepository<Employee,  String>{
    // @Query("select e.name.firstName from Employee e where e.email = :email")
     //List<String> findByEmail(@Param(value = "email") String email);
 }

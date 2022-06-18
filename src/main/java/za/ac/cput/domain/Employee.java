@@ -8,30 +8,31 @@ package za.ac.cput.domain;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.IdClass;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.Objects;
 
 @Entity
-@IdClass(Employee.EmployeeId.class)
 public class Employee implements Serializable {
-    @javax.validation.constraints.NotNull
-    @Id public String staffId;
     @NotNull
-    public String email;
-    @Embedded private Name name;
-    public Name getName()
-    {
-        return name;
-    }
+    @Id
+    private String staffId;
+    @NotNull
+    private String email;
+    @Embedded
+    private Name name;
 
     protected Employee(){}
-    private Employee(Builder builder)
-    {
-        this.staffId=builder.staffId;
-        this.email=builder.email;
 
+    private Employee(Builder builder) {
+        this.staffId = builder.staffId;
+        this.email = builder.email;
+        this.name = builder.name;
+    }
+
+    //getters
+    public Name getName() {
+        return name;
     }
 
     public String getStaffId() {
@@ -41,53 +42,56 @@ public class Employee implements Serializable {
         return email;
     }
 
-    public static class Builder
-    {
-        public String staffId;
-        public String email;
-
-        public Builder staffId(String staffId)
-        {
-            this.staffId=staffId;
-            return this;
-        }
-        public Builder email(String email)
-        {
-            this.email=email;
-            return this;
-        }
-        public Builder copy(Employee employee)
-        {
-            this.staffId=employee.staffId;
-            this.email=employee.email;
-            return this;
-        }
-        public Employee build(){ return new Employee(this);}}
-
-    public static class EmployeeId implements Serializable
-    {
-        public String staffId;
-        public EmployeeId(String staffId){this.staffId=staffId;}
-        protected EmployeeId(){}
-        public String getStaffId(){return staffId;}
-    }
     @Override
-    public boolean equals(Object o)
-    {
+    public boolean equals(Object o) {
         if(this==o) return true;
         if(o==null || getClass()!=o.getClass()) return false;
         Employee employee=(Employee) o;
-        return staffId.equals(employee.staffId);
+        return staffId.equals(employee.staffId) && email.equals(employee.email)
+                //add name
+                && name.equals(employee.name);
     }
     @Override
-    public int hashCode(){return Objects.hash(staffId);}
+    public int hashCode(){
+        return Objects.hash(staffId, email, name);
+    }
 
 
     @Override
-    public String toString()
-    {
+    public String toString() {
         return "Employee{" +
                 "staffId='" + staffId + '\'' +
                 ", email='" + email + '\'' + '}';
+    }
+
+    //builder class
+    public static class Builder {
+        private String staffId;
+        private String email;
+        private Name name;
+
+        public Builder staffId(String staffId) {
+            this.staffId=staffId;
+            return this;
+        }
+
+        public Builder email(String email) {
+            this.email=email;
+            return this;
+        }
+
+        public Builder name(Name name){
+            this.name = name;
+            return this;
+        }
+
+        public Builder copy(Employee employee)
+        {
+            this.staffId = employee.staffId;
+            this.email = employee.email;
+            this.name = employee.name;
+            return this;
+        }
+        public Employee build(){ return new Employee(this);}
     }
 }

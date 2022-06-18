@@ -32,7 +32,7 @@ public class EmployeeAddressController {
     }
 
     @GetMapping("read/{studentId}")
-    public ResponseEntity<EmployeeAddress> read(@PathVariable EmployeeAddress.EmployeeAddressId employeeAddressId)
+    public ResponseEntity<EmployeeAddress> read(@PathVariable String employeeAddressId)
     {
         log.info("Read request:{}",employeeAddressId);
         EmployeeAddress employeeAddress=this.employeeAddressService.read(employeeAddressId)
@@ -40,16 +40,16 @@ public class EmployeeAddressController {
         return ResponseEntity.ok(employeeAddress);
     }
     @DeleteMapping("delete/{studentId}")
-    public ResponseEntity<EmployeeAddress>delete(@PathVariable EmployeeAddress employeeAddress)
+    public ResponseEntity<Void>delete(@PathVariable String employeeAddressId)
     {
-        log.info("Read request:{}",employeeAddress);
-        this.employeeAddressService.delete(employeeAddress);
+        log.info("Read request:{}",employeeAddressId);
+        this.employeeAddressService.deleteById(employeeAddressId);
         return ResponseEntity.noContent().build();
     }
     @GetMapping("all")
     public ResponseEntity<List<EmployeeAddress>>findAll()
     {
-        List<EmployeeAddress>employeeAddressList=this.employeeAddressService.findAll();
+        List<EmployeeAddress>employeeAddressList=this.employeeAddressService.readAll();
         return ResponseEntity.ok(employeeAddressList);
     }
 }

@@ -11,14 +11,14 @@ class CityFactoryTest {
     public void buildWithSuccess()
     {
         City city=CityFactory
-                .build("Test-Id","Cape Town");
+                .build("Test-Id","Cape Town", new Country());
         System.out.println(city);
         assertNotNull(city);
     }
     @Test
     void buildWithError()
     {
-        Exception exception=assertThrows(IllegalArgumentException.class,()-> CityFactory.build(null, "Cape Town"));
+        Exception exception=assertThrows(IllegalArgumentException.class,()-> CityFactory.build(null, "Cape Town", new Country()));
         String exceptionMessage=exception.getMessage();
         System.out.println(exceptionMessage);
         assertSame("City ID is required!",exceptionMessage);

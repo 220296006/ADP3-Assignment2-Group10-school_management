@@ -31,7 +31,7 @@ public class CityController {
     }
 
     @GetMapping("read/{cityId}")
-    public ResponseEntity<City> read(@PathVariable City.CityId cityId)
+    public ResponseEntity<City> read(@PathVariable String cityId)
     {
         log.info("Read request:{}",cityId);
         City student=this.cityService.read(cityId)
@@ -39,16 +39,16 @@ public class CityController {
         return ResponseEntity.ok(student);
     }
     @DeleteMapping("delete/{cityId}")
-    public ResponseEntity<City>delete(@PathVariable City city)
+    public ResponseEntity<Void>delete(@PathVariable String cityId)
     {
-        log.info("Read request:{}",city);
-        this.cityService.delete(city);
+        log.info("Read request:{}",cityId);
+        this.cityService.deleteById(cityId);
         return ResponseEntity.noContent().build();
     }
     @GetMapping("all")
     public ResponseEntity<List<City>>findAll()
     {
-        List<City>cityList=this.cityService.findAll();
+        List<City>cityList=this.cityService.readAll();
         return ResponseEntity.ok(cityList);
     }
 }
