@@ -23,14 +23,14 @@ import static org.junit.jupiter.api.Assertions.*;
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class StudentAddressControllerTest {
     @LocalServerPort
-    public int port;
-    @Autowired public StudentAddressController studentAddressController;
-    @Autowired public TestRestTemplate restTemplate;
-    public StudentAddress studentAddress;
-    public Address address;
-    public City city;
-    public Country country;
-    public String baseUrl;
+    private int port;
+    @Autowired private StudentAddressController studentAddressController;
+    @Autowired private TestRestTemplate restTemplate;
+    private StudentAddress studentAddress;
+    private Address address;
+    private City city;
+    private Country country;
+    private String baseUrl;
 
     @BeforeEach
     void setUp()
@@ -38,16 +38,15 @@ class StudentAddressControllerTest {
         this.country = CountryFactory.build("9", "Japan");
         this.city = CityFactory.build("9", "kyoto", country);
         this.address = AddressFactory.build("6", "qwerty", "5", "aaaa","4568", city);
-        this.studentAddress= StudentAddressFactory.build("5", address);
-        this.baseUrl="http://localhost:" + this.port + "/schoolmanagement/student/";
+        this.studentAddress= StudentAddressFactory.build("9", address);
+        this.baseUrl="http://localhost:" + this.port + "/schoolmanagement/studentAddress/";
     }
     @Test
     @Order(1)
     void save() {
-        String url = baseUrl + "save";
+        String url = baseUrl + "save/";
         System.out.println(url);
-        ResponseEntity<StudentAddress> response = this.restTemplate
-                .postForEntity(url, this.studentAddress, StudentAddress.class);
+        ResponseEntity<StudentAddress> response = this.restTemplate.postForEntity(url, this.studentAddress, StudentAddress.class);
         System.out.println(response);
         assertAll(
                 () -> assertEquals(HttpStatus.OK, response.getStatusCode()),
@@ -89,7 +88,7 @@ class StudentAddressControllerTest {
         System.out.println(Arrays.asList(response.getBody()));
         assertAll(
                 ()->assertEquals(HttpStatus.OK,response.getStatusCode()),
-                ()->assertTrue(response.getBody().length==0)
+                ()->assertTrue(response.getBody().length==1)
         );
     }
 }

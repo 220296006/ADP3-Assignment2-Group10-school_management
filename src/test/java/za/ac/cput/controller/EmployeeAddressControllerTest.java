@@ -35,17 +35,18 @@ class EmployeeAddressControllerTest {
     @BeforeEach
     void setUp()
     {
+
         this.country = CountryFactory.build("9", "Japan");
         this.city = CityFactory.build("9", "kyoto", country);
         this.address = AddressFactory.build("6", "qwerty", "5", "aaaa","4568", city);
         this.employeeAddress= EmployeeAddressFactory.build("1", address);
-        this.baseUrl="http://localhost:"+ this.port + "/schoolmanagement/employee-address/";
+        this.baseUrl="http://localhost:"+ this.port + "/schoolmanagement/employeeAddress/";
     }
     @Test
     @Order(1)
     void save()
     {
-        String url=baseUrl+ "save";
+        String url=baseUrl+ "save/";
         System.out.println(url);
         ResponseEntity<EmployeeAddress> response=this.restTemplate
                 .postForEntity(url,this.employeeAddress,EmployeeAddress.class);
@@ -86,7 +87,7 @@ class EmployeeAddressControllerTest {
        System.out.println(Arrays.asList(response.getBody()));
        assertAll(
                ()->assertEquals(HttpStatus.OK,response.getStatusCode()),
-               ()->assertTrue(response.getBody().length==0)
+               ()->assertTrue(response.getBody().length==3)
        );
    }
 }

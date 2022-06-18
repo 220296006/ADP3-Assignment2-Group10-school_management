@@ -80,7 +80,7 @@ class StudentControllerTest {
         System.out.println(Arrays.asList(response.getBody()));
         assertAll(
                 ()->assertEquals(HttpStatus.OK,response.getStatusCode()),
-                ()->assertTrue(response.getBody().length==1)
+                ()->assertTrue(response.getBody().length==2)
         );
     }
 }

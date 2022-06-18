@@ -14,7 +14,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("schoolmanagement/employee-address/")
+@RequestMapping("schoolmanagement/employeeAddress/")
 @Slf4j
 public class EmployeeAddressController {
     public final EmployeeAddressService employeeAddressService;
@@ -31,7 +31,7 @@ public class EmployeeAddressController {
         return ResponseEntity.ok(save);
     }
 
-    @GetMapping("read/{studentId}")
+    @GetMapping("read/{employeeAddressId}")
     public ResponseEntity<EmployeeAddress> read(@PathVariable String employeeAddressId)
     {
         log.info("Read request:{}",employeeAddressId);
@@ -39,7 +39,7 @@ public class EmployeeAddressController {
                 .orElseThrow(()->new ResponseStatusException(HttpStatus.NOT_FOUND));
         return ResponseEntity.ok(employeeAddress);
     }
-    @DeleteMapping("delete/{studentId}")
+    @DeleteMapping("delete/{employeeAddressId}")
     public ResponseEntity<Void>delete(@PathVariable String employeeAddressId)
     {
         log.info("Read request:{}",employeeAddressId);

@@ -30,7 +30,7 @@ public class StudentAddressController {
         return ResponseEntity.ok(save);
     }
 
-    @GetMapping("read/{studentId}")
+    @GetMapping("read/{studentAddressId}")
     public ResponseEntity<StudentAddress> read(@PathVariable String studentAddressId)
     {
         log.info("Read request:{}",studentAddressId);
@@ -38,7 +38,7 @@ public class StudentAddressController {
                 .orElseThrow(()->new ResponseStatusException(HttpStatus.NOT_FOUND));
         return ResponseEntity.ok(studentAddress);
     }
-    @DeleteMapping("delete/{studentId}")
+    @DeleteMapping("delete/{studentAddressId}")
     public ResponseEntity<StudentAddress>delete(@PathVariable String studentAddressId)
     {
         log.info("Read request:{}",studentAddressId);
