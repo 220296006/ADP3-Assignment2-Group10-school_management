@@ -7,10 +7,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 import za.ac.cput.domain.Employee;
+import za.ac.cput.domain.Name;
 import za.ac.cput.service.service.EmployeeService;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("schoolmanagement/employee/")
@@ -51,4 +53,13 @@ public class EmployeeController {
         List<Employee>employeeList=this.employeeService.readAll();
         return ResponseEntity.ok(employeeList);
     }
+
+    @GetMapping("findByEmail/{email}")
+    public ResponseEntity<Name>findEmployeeByEmail(@PathVariable String email){
+        log.info("Find employee name by email: {}", email);
+
+        Employee employee = this.employeeService.findEmployeeByEmail(email).orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND));
+        return ResponseEntity.ok(employee.getName());
+    }
+
 }

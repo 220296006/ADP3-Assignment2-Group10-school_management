@@ -2,8 +2,8 @@ package za.ac.cput.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import za.ac.cput.Util.GenericHelper;
 import za.ac.cput.domain.Employee;
-import za.ac.cput.domain.Student;
 import za.ac.cput.repository.IEmployeeRepository;
 import za.ac.cput.service.service.EmployeeService;
 
@@ -44,7 +44,13 @@ public class EmployeeServiceImpl implements EmployeeService {
     public void deleteById(String id) {
         Optional<Employee> employee = read(id);
         employee.ifPresent(this::delete);
-        }
+    }
+
+    @Override
+    public Optional<Employee> findEmployeeByEmail(String email){
+        GenericHelper.emailIsValid(email);
+        return this.repository.findEmployeeByEmail(email);
+    }
 
     }
 

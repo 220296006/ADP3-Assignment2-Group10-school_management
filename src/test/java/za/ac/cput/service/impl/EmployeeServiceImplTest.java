@@ -22,8 +22,10 @@ import static org.junit.jupiter.api.Assertions.*;
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class EmployeeServiceImplTest {
 
-    private final Name name = NameFactory.build("Zaeem","a","Petersen");
+    private final Name name = NameFactory.build("Zaeem","","Petersen");
     private final Employee employee = EmployeeFactory.build("1","randomemail@gmail.com",name);
+
+    private final Employee employee1 = EmployeeFactory.build("02", "219010145@mycput.ac.za", name);
 
     @Autowired
     private EmployeeService empService;
@@ -32,6 +34,7 @@ class EmployeeServiceImplTest {
     @Test
     void save() {
         Employee create = this.empService.save(this.employee);
+        Employee create2 = this.empService.save(this.employee1);
         assertEquals(this.employee,create);
         System.out.println(create);
     }
@@ -57,14 +60,23 @@ class EmployeeServiceImplTest {
     @Test
     void readAll() {
         List<Employee> employeeList = this.empService.readAll();
-        assertEquals(1,employeeList.size());
+        assertEquals(2,employeeList.size());
     }
 
-    @Order(4)
+    @Order(5)
     @Test
     void deleteById() {
         empService.deleteById("1");
         List<Employee> employeeList = this.empService.readAll();
         System.out.println(employeeList);
+    }
+
+    @Order(4)
+    @Test
+    void findEmployeeByEmail(){
+        Optional<Employee> employeeList = this.empService.findEmployeeByEmail(this.employee1.getEmail());
+        System.out.println(employeeList);
+        assertNotNull(employeeList);
+
     }
 }

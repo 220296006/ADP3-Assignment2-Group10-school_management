@@ -49,7 +49,7 @@ class EmployeeControllerTest {
         );
     }
     @Test
-    @Order(3)
+    @Order(5)
     void delete()
     {
         String url=baseUrl + "delete/" + this.employee.getStaffId();
@@ -75,7 +75,7 @@ class EmployeeControllerTest {
 
 
     @Test
-    @Order(4)
+    @Order(3)
     void findAll()
     {
         String url=baseUrl +"all";
@@ -85,7 +85,19 @@ class EmployeeControllerTest {
         System.out.println(Arrays.asList(response.getBody()));
         assertAll(
                 ()->assertEquals(HttpStatus.OK,response.getStatusCode()),
-                ()->assertTrue(response.getBody().length==0)
+                ()->assertTrue(response.getBody().length==1)
         );
+    }
+    @Test
+    @Order(4)
+    void findEmployeeByEmail(){
+        String url = baseUrl + "findByEmail/" + this.employee.getEmail();
+        ResponseEntity<Employee> response = this.restTemplate.getForEntity(url, Employee.class);
+        assertAll(
+                () -> assertEquals(HttpStatus.OK, response.getStatusCode()),
+                () -> assertNotNull(response.getBody())
+        );
+        System.out.println(url);
+
     }
 }

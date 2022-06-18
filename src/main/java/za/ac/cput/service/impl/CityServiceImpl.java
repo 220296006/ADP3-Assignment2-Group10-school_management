@@ -3,7 +3,6 @@ package za.ac.cput.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import za.ac.cput.domain.City;
-import za.ac.cput.domain.Student;
 import za.ac.cput.repository.ICityRepository;
 import za.ac.cput.service.service.CityService;
 
@@ -45,4 +44,8 @@ public class CityServiceImpl implements CityService {
         city.ifPresent(this::delete);
     }
 
+    @Override
+    public List<City> findCitiesByCountry_CountryId(String CoId){
+        return this.repository.findCitiesByCountry_CountryId(CoId);
+    }
 }

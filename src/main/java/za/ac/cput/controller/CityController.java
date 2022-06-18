@@ -51,4 +51,13 @@ public class CityController {
         List<City>cityList=this.cityService.readAll();
         return ResponseEntity.ok(cityList);
     }
+
+    @GetMapping("readCityByCountryId/{countryId}")
+    public ResponseEntity<List<City>> findCitiesByCountryId(@PathVariable String countryId){
+        log.info("get cities from country: {}", countryId);
+        List<City> cityList = this.cityService.findCitiesByCountry_CountryId(countryId);
+        System.out.println(cityList);
+        return ResponseEntity.ok(cityList);
+    }
+
 }

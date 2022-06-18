@@ -47,7 +47,7 @@ class CountryControllerTest {
         );
     }
     @Test
-    @Order(3)
+    @Order(4)
     void delete()
     {
         String url=baseUrl + "delete/" + this.country.getCountryId();
@@ -72,7 +72,7 @@ class CountryControllerTest {
 
 
     @Test
-    @Order(4)
+    @Order(3)
     void findAll()
     {
         String url=baseUrl +"all";
@@ -82,7 +82,7 @@ class CountryControllerTest {
         System.out.println(Arrays.asList(response.getBody()));
         assertAll(
                 ()->assertEquals(HttpStatus.OK,response.getStatusCode()),
-                ()->assertTrue(response.getBody().length==0)
+                ()->assertTrue(response.getBody().length==1)
         );
     }
 }

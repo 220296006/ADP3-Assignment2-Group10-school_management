@@ -58,12 +58,18 @@ class CityServiceImplTest {
         assertEquals(1,cityList.size());
     }
 
-    @Order(4)
+    @Order(5)
     @Test
     void deleteById() {
         this.cityService.deleteById("1");
         List<City> cityList = this.cityService.readAll();
         System.out.println(cityList);
 
+    }
+    @Order(4)
+    @Test
+    void findCitiesByCountry(){
+    List<City> cityList = this.cityService.findCitiesByCountry_CountryId(country.getCountryId());
+        System.out.println(cityList);
     }
 }
